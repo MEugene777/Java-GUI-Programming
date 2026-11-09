@@ -9,7 +9,7 @@ public class GridLayoutDemo {
 
         JPanel panel = new JPanel();
 
-        panel.setLayout(new GridLayout(2, 2, 10, 10));
+        panel.setLayout(new GridLayout(3, 2, 10, 10));
 
         panel.add(new JButton("Button 1"));
         panel.add(new JButton("Button 2"));
