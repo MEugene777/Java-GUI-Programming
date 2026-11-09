@@ -9,7 +9,7 @@ public class BoxLayoutDemo {
 
         JPanel panel = new JPanel();
 
-        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
         JButton button1 = new JButton("Button 1");
         JButton button2 = new JButton("Button 2");
