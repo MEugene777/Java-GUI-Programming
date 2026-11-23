@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="12" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="StudentController" style="-fx-padding: 18; -fx-background-color: #F8FAFC;">
+
+    <Label text="Riara University — Student Management System (Capstone)"
+           style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1B365D;"/>
+
+    <GridPane hgap="10" vgap="8">
+        <Label text="Admission No:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="regNumberField" promptText="e.g., 24ZAD110021" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <Label text="Full Name:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="fullNameField" promptText="Enter student name" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Label text="Course:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="courseField" promptText="e.g., BBIT" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    </GridPane>
+
+    <HBox spacing="10">
+        <Button fx:id="saveButton" text="Save Student" onAction="#handleSaveStudent"
+                style="-fx-background-color: #1B365D; -fx-text-fill: white; -fx-font-weight: bold;"/>
+        <Button text="Refresh Records" onAction="#loadStudents"/>
+        <Label fx:id="statusLabel" text="Ready" style="-fx-text-fill: #2B547E; -fx-padding: 5 0 0 8;"/>
+    </HBox>
+
+    <TableView fx:id="studentTable" prefHeight="220">
+        <columns>
+            <TableColumn fx:id="regCol" text="Admission No" prefWidth="140"/>
+            <TableColumn fx:id="nameCol" text="Full Name" prefWidth="220"/>
+            <TableColumn fx:id="courseCol" text="Course" prefWidth="120"/>
+        </columns>
+    </TableView>
+</VBox>

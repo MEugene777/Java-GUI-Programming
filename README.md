@@ -1,32 +1,19 @@
-# Java GUI Programming
+# Java GUI Programming (RBCS 7312) — Coursework Portfolio
 
-A collection of Java GUI coursework and practical projects developed as part of my BBIT studies at Riara University.
+**Student:** Eugene Lemayian Mukosa (`24ZAD110021`)  
+**Institution:** Riara University — School of Computing Sciences (BBIT)  
+**Lecturer:** Florence Kimani  
 
-## Project Structure
+## Repository Structure (Weeks 1–10)
 
-- Week-1: Java GUI programming fundamentals.
-- Week-2: GUI programming practical exercises.
-- Week-3-Swing: Java Swing layouts and components.
-- Week-4-Event-Handling: Java event handling and listeners.
-- Week-5-Advanced-Swing: Advanced Swing components and file handling.
-- Week-6-JavaFX: JavaFX application development.
-
-## Technologies Used
-
-- Java
-- Java Swing
-- JavaFX
-- Visual Studio Code
-- Git and GitHub
-
-## Learning Objectives
-
-- Understand graphical user interface development.
-- Build interactive Java applications.
-- Work with event handling and listeners.
-- Implement different GUI layouts.
-- Develop applications using Swing and JavaFX.
-
-## Author
-
-Eugene Mukosa
+| Folder | Topic & Implementation Highlights |
+| :--- | :--- |
+| **Weeks 1 – 2** | Java GUI fundamentals, AWT/Swing component hierarchy, and Observer pattern basics. |
+| **`Week-3-Swing/`** | Swing containers and layout managers (`FlowLayout`, `GridLayout`, `CardLayout`). |
+| **`Week-4-Event-Handling/`** | Event-driven programming with `ActionListener` and interactive Swing controls. |
+| **`Week-5-Advanced-Swing/`** | Advanced Swing components (`JTable`, `JTree`, `JTabbedPane`, `JProgressBar`, `JToolBar`, `JDialog`, `JFileChooser`). |
+| **`Week-6-JavaFX/`** | JavaFX application lifecycle, scene graphs, layouts (`BorderPane`, `HBox`, `VBox`, `GridPane`), and controls. |
+| **`Week-7-JavaFX-Events-Styling/`** | JavaFX event handlers, property bindings, and inline CSS styling (`JavaFXEventsAndBindings.java`). |
+| **`Week-8-Interactive-Applications/`** | Mini Project: Event-driven Java Swing Calculator (`CalculatorApp.java`). |
+| **`Week-9-Event-Logging/`** | Structured event monitoring using `java.util.logging` (`LoggingDemo.java`). |
+| **`Week-10-Capstone-University-System/`** | Final Capstone Project: University Management System demonstrating Layered Event-Driven Architecture (`Student.java`, `DatabaseUtil.java`, `StudentView.fxml`, `StudentController.java`, `App.java`), multi-threaded `Task`, and `ScheduledExecutorService` heartbeats. |
