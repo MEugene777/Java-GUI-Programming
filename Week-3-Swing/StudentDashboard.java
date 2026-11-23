@@ -1,20 +1,23 @@
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.util.ArrayList;
 
 public class StudentDashboard {
 
-    // Store multiple student records
     static ArrayList<String[]> students = new ArrayList<>();
-
-    // Table used to display students
     static DefaultTableModel tableModel;
+    static JLabel countLabel;
+
+    static Color navyBlue = new Color(25, 45, 75);
+    static Color accentBlue = new Color(45, 110, 200);
+    static Color lightBackground = new Color(240, 243, 248);
+    static Color white = Color.WHITE;
 
     public static void main(String[] args) {
 
-        // Add the first student
         students.add(new String[]{
             "Eugene Mukosa",
             "24ZAD110021",
@@ -22,26 +25,34 @@ public class StudentDashboard {
             "Final Year"
         });
 
-        // Create the main window
-        JFrame frame = new JFrame("Student Dashboard");
+        JFrame frame = new JFrame("Student Management System");
 
-        frame.setSize(850, 500);
+        frame.setSize(1000, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new BorderLayout());
 
-        // Header
-        JLabel title = new JLabel(
-            "STUDENT MANAGEMENT SYSTEM",
-            SwingConstants.CENTER
-        );
+        frame.getContentPane().setBackground(lightBackground);
 
-        title.setFont(new Font("Arial", Font.BOLD, 22));
-        title.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 10));
+        // HEADER
+        JPanel header = new JPanel(new BorderLayout());
+        header.setBackground(navyBlue);
+        header.setBorder(BorderFactory.createEmptyBorder(20, 25, 20, 25));
 
-        frame.add(title, BorderLayout.NORTH);
+        JLabel title = new JLabel("STUDENT MANAGEMENT SYSTEM");
+        title.setFont(new Font("Arial", Font.BOLD, 24));
+        title.setForeground(white);
 
-        // Student table
+        countLabel = new JLabel();
+        countLabel.setFont(new Font("Arial", Font.BOLD, 15));
+        countLabel.setForeground(white);
+
+        header.add(title, BorderLayout.WEST);
+        header.add(countLabel, BorderLayout.EAST);
+
+        frame.add(header, BorderLayout.NORTH);
+
+        // TABLE
         String[] columns = {
             "Student Name",
             "Admission Number",
@@ -49,72 +60,76 @@ public class StudentDashboard {
             "Year of Study"
         };
 
-        tableModel = new DefaultTableModel(columns, 0);
+        tableModel = new DefaultTableModel(columns, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
 
         JTable studentTable = new JTable(tableModel);
+        studentTable.setRowHeight(32);
+        studentTable.setFont(new Font("Arial", Font.PLAIN, 14));
+        studentTable.setSelectionBackground(new Color(210, 225, 245));
+        studentTable.setSelectionForeground(Color.BLACK);
+
+        JTableHeader tableHeader = studentTable.getTableHeader();
+        tableHeader.setBackground(navyBlue);
+        tableHeader.setForeground(white);
+        tableHeader.setFont(new Font("Arial", Font.BOLD, 14));
+        tableHeader.setPreferredSize(new Dimension(100, 40));
 
         JScrollPane scrollPane = new JScrollPane(studentTable);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder());
 
-        frame.add(scrollPane, BorderLayout.CENTER);
-
-        // Load existing students into the table
-        refreshTable();
-
-        // Navigation panel
-        JPanel navigationPanel = new JPanel(
-            new FlowLayout(FlowLayout.CENTER)
+        JPanel centerPanel = new JPanel(new BorderLayout());
+        centerPanel.setBackground(lightBackground);
+        centerPanel.setBorder(
+            BorderFactory.createEmptyBorder(25, 25, 25, 25)
         );
 
-        JButton homeButton = new JButton("Home");
-        JButton studentsButton = new JButton("Students");
-        JButton coursesButton = new JButton("Courses");
-        JButton reportsButton = new JButton("Reports");
+        JLabel sectionTitle = new JLabel("Registered Students");
+        sectionTitle.setFont(new Font("Arial", Font.BOLD, 20));
+        sectionTitle.setForeground(navyBlue);
+        sectionTitle.setBorder(
+            BorderFactory.createEmptyBorder(0, 0, 15, 0)
+        );
 
-        navigationPanel.add(homeButton);
-        navigationPanel.add(studentsButton);
-        navigationPanel.add(coursesButton);
-        navigationPanel.add(reportsButton);
+        centerPanel.add(sectionTitle, BorderLayout.NORTH);
+        centerPanel.add(scrollPane, BorderLayout.CENTER);
 
-        // Quick actions panel
+        frame.add(centerPanel, BorderLayout.CENTER);
+
+        // ACTION PANEL
         JPanel actionPanel = new JPanel();
-
         actionPanel.setLayout(
             new BoxLayout(actionPanel, BoxLayout.Y_AXIS)
         );
 
+        actionPanel.setBackground(white);
         actionPanel.setBorder(
-            BorderFactory.createEmptyBorder(20, 10, 20, 15)
+            BorderFactory.createEmptyBorder(25, 15, 25, 15)
         );
 
-        JButton addButton = new JButton("Add Student");
-        JButton viewButton = new JButton("View Students");
-        JButton updateButton = new JButton("Update Student");
-        JButton deleteButton = new JButton("Delete Student");
-        JButton searchButton = new JButton("Search Student");
+        JButton addButton = createButton("Add Student");
+        JButton viewButton = createButton("View Students");
+        JButton updateButton = createButton("Update Student");
+        JButton deleteButton = createButton("Delete Student");
+        JButton searchButton = createButton("Search Student");
 
         actionPanel.add(addButton);
-        actionPanel.add(Box.createVerticalStrut(10));
-
+        actionPanel.add(Box.createVerticalStrut(15));
         actionPanel.add(viewButton);
-        actionPanel.add(Box.createVerticalStrut(10));
-
+        actionPanel.add(Box.createVerticalStrut(15));
         actionPanel.add(updateButton);
-        actionPanel.add(Box.createVerticalStrut(10));
-
+        actionPanel.add(Box.createVerticalStrut(15));
         actionPanel.add(deleteButton);
-        actionPanel.add(Box.createVerticalStrut(10));
-
+        actionPanel.add(Box.createVerticalStrut(15));
         actionPanel.add(searchButton);
 
-        // Combine navigation and actions
-        JPanel bottomPanel = new JPanel(new BorderLayout());
+        frame.add(actionPanel, BorderLayout.EAST);
 
-        bottomPanel.add(navigationPanel, BorderLayout.CENTER);
-        bottomPanel.add(actionPanel, BorderLayout.EAST);
-
-        frame.add(bottomPanel, BorderLayout.SOUTH);
-
-        // Add student
+        // ADD STUDENT
         addButton.addActionListener(e -> {
 
             JTextField nameField = new JTextField();
@@ -148,14 +163,14 @@ public class StudentDashboard {
 
                     JOptionPane.showMessageDialog(
                         frame,
-                        "Please fill in all student details."
+                        "Please fill in all fields."
                     );
 
                 } else if (findStudent(admission) != -1) {
 
                     JOptionPane.showMessageDialog(
                         frame,
-                        "That admission number already exists."
+                        "Admission number already exists."
                     );
 
                 } else {
@@ -174,7 +189,7 @@ public class StudentDashboard {
             }
         });
 
-        // View students
+        // VIEW STUDENTS
         viewButton.addActionListener(e -> {
 
             refreshTable();
@@ -185,37 +200,37 @@ public class StudentDashboard {
             );
         });
 
-        // Update student
+        // UPDATE STUDENT
         updateButton.addActionListener(e -> {
 
             String admission = JOptionPane.showInputDialog(
                 frame,
-                "Enter the admission number of the student to update:"
+                "Enter admission number:"
             );
 
-            if (admission == null) {
-                return;
-            }
+            if (admission == null) return;
 
             int index = findStudent(admission.trim());
 
             if (index == -1) {
 
-                JOptionPane.showMessageDialog(
-                    frame,
-                    "Student not found."
-                );
+                JOptionPane.showMessageDialog(frame, "Student not found.");
 
             } else {
 
-                JTextField nameField = new JTextField(students.get(index)[0]);
-                JTextField courseField = new JTextField(students.get(index)[2]);
-                JTextField yearField = new JTextField(students.get(index)[3]);
+                JTextField nameField =
+                    new JTextField(students.get(index)[0]);
+
+                JTextField courseField =
+                    new JTextField(students.get(index)[2]);
+
+                JTextField yearField =
+                    new JTextField(students.get(index)[3]);
 
                 Object[] fields = {
-                    "New Student Name:", nameField,
-                    "New Course:", courseField,
-                    "New Year of Study:", yearField
+                    "Student Name:", nameField,
+                    "Course:", courseField,
+                    "Year of Study:", yearField
                 };
 
                 int result = JOptionPane.showConfirmDialog(
@@ -238,9 +253,14 @@ public class StudentDashboard {
 
                     } else {
 
-                        students.get(index)[0] = nameField.getText().trim();
-                        students.get(index)[2] = courseField.getText().trim();
-                        students.get(index)[3] = yearField.getText().trim();
+                        students.get(index)[0] =
+                            nameField.getText().trim();
+
+                        students.get(index)[2] =
+                            courseField.getText().trim();
+
+                        students.get(index)[3] =
+                            yearField.getText().trim();
 
                         refreshTable();
 
@@ -253,33 +273,27 @@ public class StudentDashboard {
             }
         });
 
-        // Delete student
+        // DELETE STUDENT
         deleteButton.addActionListener(e -> {
 
             String admission = JOptionPane.showInputDialog(
                 frame,
-                "Enter the admission number of the student to delete:"
+                "Enter admission number:"
             );
 
-            if (admission == null) {
-                return;
-            }
+            if (admission == null) return;
 
             int index = findStudent(admission.trim());
 
             if (index == -1) {
 
-                JOptionPane.showMessageDialog(
-                    frame,
-                    "Student not found."
-                );
+                JOptionPane.showMessageDialog(frame, "Student not found.");
 
             } else {
 
                 int choice = JOptionPane.showConfirmDialog(
                     frame,
-                    "Are you sure you want to delete "
-                        + students.get(index)[0] + "?",
+                    "Delete " + students.get(index)[0] + "?",
                     "Confirm Deletion",
                     JOptionPane.YES_NO_OPTION
                 );
@@ -287,7 +301,6 @@ public class StudentDashboard {
                 if (choice == JOptionPane.YES_OPTION) {
 
                     students.remove(index);
-
                     refreshTable();
 
                     JOptionPane.showMessageDialog(
@@ -298,7 +311,7 @@ public class StudentDashboard {
             }
         });
 
-        // Search student
+        // SEARCH STUDENT
         searchButton.addActionListener(e -> {
 
             String admission = JOptionPane.showInputDialog(
@@ -306,18 +319,13 @@ public class StudentDashboard {
                 "Enter admission number to search:"
             );
 
-            if (admission == null) {
-                return;
-            }
+            if (admission == null) return;
 
             int index = findStudent(admission.trim());
 
             if (index == -1) {
 
-                JOptionPane.showMessageDialog(
-                    frame,
-                    "Student not found."
-                );
+                JOptionPane.showMessageDialog(frame, "Student not found.");
 
             } else {
 
@@ -325,44 +333,39 @@ public class StudentDashboard {
 
                 JOptionPane.showMessageDialog(
                     frame,
-                    "Student Name: " + student[0] + "\n"
+                    "Name: " + student[0] + "\n"
                     + "Admission Number: " + student[1] + "\n"
                     + "Course: " + student[2] + "\n"
-                    + "Year of Study: " + student[3],
+                    + "Year: " + student[3],
                     "Student Details",
                     JOptionPane.INFORMATION_MESSAGE
                 );
             }
         });
 
-        // Navigation buttons
-        homeButton.addActionListener(e ->
-            JOptionPane.showMessageDialog(frame, "Welcome to Home!")
-        );
+        refreshTable();
 
-        studentsButton.addActionListener(e ->
-            JOptionPane.showMessageDialog(
-                frame,
-                "Registered Students: " + students.size()
-            )
-        );
-
-        coursesButton.addActionListener(e ->
-            JOptionPane.showMessageDialog(frame, "BBIT Course Section")
-        );
-
-        reportsButton.addActionListener(e ->
-            JOptionPane.showMessageDialog(
-                frame,
-                "Total Students: " + students.size()
-            )
-        );
-
-        // Display window
         frame.setVisible(true);
     }
 
-    // Refresh the student table
+    // CREATE STYLED BUTTONS
+    public static JButton createButton(String text) {
+
+        JButton button = new JButton(text);
+
+        button.setFont(new Font("Arial", Font.BOLD, 13));
+        button.setBackground(accentBlue);
+        button.setForeground(white);
+        button.setFocusPainted(false);
+        button.setBorderPainted(false);
+        button.setAlignmentX(Component.CENTER_ALIGNMENT);
+        button.setMaximumSize(new Dimension(170, 40));
+        button.setPreferredSize(new Dimension(170, 40));
+
+        return button;
+    }
+
+    // REFRESH TABLE AND STUDENT COUNT
     public static void refreshTable() {
 
         tableModel.setRowCount(0);
@@ -370,9 +373,11 @@ public class StudentDashboard {
         for (String[] student : students) {
             tableModel.addRow(student);
         }
+
+        countLabel.setText("Total Students: " + students.size());
     }
 
-    // Find a student using admission number
+    // FIND STUDENT BY ADMISSION NUMBER
     public static int findStudent(String admission) {
 
         for (int i = 0; i < students.size(); i++) {
