@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 public class StudentController {
-
     @FXML private TextField regNumberField;
     @FXML private TextField fullNameField;
     @FXML private TextField courseField;
@@ -21,13 +20,11 @@ public class StudentController {
         nameCol.setCellValueFactory(data -> data.getValue().fullNameProperty());
         courseCol.setCellValueFactory(data -> data.getValue().courseProperty());
 
-        // Week 8 Property Binding: disable Save button until required fields are filled
         saveButton.disableProperty().bind(
             regNumberField.textProperty().isEmpty()
                 .or(fullNameField.textProperty().isEmpty())
                 .or(courseField.textProperty().isEmpty())
         );
-
         loadStudents();
     }
 
@@ -38,10 +35,8 @@ public class StudentController {
             fullNameField.getText().trim(),
             courseField.getText().trim()
         );
-
         statusLabel.setText("Saving student in background...");
 
-        // LO2 & LO4: Multi-threaded Producer-Consumer Task
         Task<Void> saveTask = new Task<>() {
             @Override
             protected Void call() throws Exception {
@@ -57,34 +52,24 @@ public class StudentController {
             statusLabel.setText("Student saved successfully.");
             loadStudents();
         });
-
-        saveTask.setOnFailed(e ->
-            statusLabel.setText("Error saving student: " + saveTask.getException().getMessage())
-        );
-
+        saveTask.setOnFailed(e -> statusLabel.setText("Error saving student."));
         new Thread(saveTask).start();
     }
 
     @FXML
     public void loadStudents() {
         statusLabel.setText("Loading student records...");
-
         Task<ObservableList<Student>> loadTask = new Task<>() {
             @Override
             protected ObservableList<Student> call() throws Exception {
                 return DatabaseUtil.fetchAllStudents();
             }
         };
-
         loadTask.setOnSucceeded(e -> {
             studentTable.setItems(loadTask.getValue());
             statusLabel.setText("Loaded " + loadTask.getValue().size() + " record(s).");
         });
-
-        loadTask.setOnFailed(e ->
-            statusLabel.setText("Failed to load records.")
-        );
-
+        loadTask.setOnFailed(e -> statusLabel.setText("Failed to load records."));
         new Thread(loadTask).start();
     }
 }

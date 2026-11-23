@@ -10,7 +10,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class JavaFXEventsAndBindings extends Application {
-
     @Override
     public void start(Stage primaryStage) {
         Label titleLabel = new Label("Week 7: JavaFX Events, Properties & CSS");
@@ -39,13 +38,9 @@ public class JavaFXEventsAndBindings extends Application {
         root.setPadding(new Insets(20));
         root.setStyle("-fx-background-color: #F4F6F9;");
 
-        Scene scene = new Scene(root, 400, 260);
         primaryStage.setTitle("Week 7 - JavaFX Events & Bindings");
-        primaryStage.setScene(scene);
+        primaryStage.setScene(new Scene(root, 400, 260));
         primaryStage.show();
     }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
+    public static void main(String[] args) { launch(args); }
 }

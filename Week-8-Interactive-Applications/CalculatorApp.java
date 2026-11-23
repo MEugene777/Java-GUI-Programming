@@ -23,12 +23,7 @@ class Calculator {
         display.setFont(new Font("SansSerif", Font.BOLD, 20));
 
         JPanel buttonPanel = new JPanel(new GridLayout(4, 4, 5, 5));
-        String[] buttons = {
-            "7", "8", "9", "/",
-            "4", "5", "6", "*",
-            "1", "2", "3", "-",
-            "0", "C", "=", "+"
-        };
+        String[] buttons = {"7","8","9","/","4","5","6","*","1","2","3","-","0","C","=","+"};
 
         for (String text : buttons) {
             JButton button = new JButton(text);
@@ -40,7 +35,6 @@ class Calculator {
         frame.setLayout(new BorderLayout(5, 5));
         frame.add(display, BorderLayout.NORTH);
         frame.add(buttonPanel, BorderLayout.CENTER);
-
         frame.setSize(300, 400);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,7 +45,6 @@ class Calculator {
         @Override
         public void actionPerformed(ActionEvent e) {
             String command = e.getActionCommand();
-
             if ("0123456789".contains(command)) {
                 display.setText(display.getText() + command);
             } else if ("+-*/".contains(command)) {
@@ -64,14 +57,11 @@ class Calculator {
                 if (!display.getText().isEmpty() && !operator.isEmpty()) {
                     double num2 = Double.parseDouble(display.getText());
                     double result = 0;
-
                     switch (operator) {
                         case "+": result = num1 + num2; break;
                         case "-": result = num1 - num2; break;
                         case "*": result = num1 * num2; break;
-                        case "/":
-                            result = (num2 != 0) ? num1 / num2 : Double.NaN;
-                            break;
+                        case "/": result = (num2 != 0) ? num1 / num2 : Double.NaN; break;
                     }
                     display.setText(String.valueOf(result));
                     operator = "";

@@ -8,8 +8,6 @@ public class DatabaseUtil {
     private static final String URL = "jdbc:mysql://localhost:3306/riara_university";
     private static final String USER = "root";
     private static final String PASSWORD = "";
-
-    // In-memory fallback so the capstone runs cleanly even without a local MySQL daemon
     private static final List<Student> fallbackStore = new ArrayList<>();
 
     static {
@@ -29,7 +27,7 @@ public class DatabaseUtil {
             stmt.setString(3, student.getCourse());
             stmt.executeUpdate();
         } catch (SQLException ex) {
-            Thread.sleep(300); // Simulate DB latency
+            Thread.sleep(300);
             fallbackStore.add(student);
         }
     }
@@ -48,7 +46,7 @@ public class DatabaseUtil {
                 ));
             }
         } catch (SQLException ex) {
-            Thread.sleep(300); // Simulate DB query latency
+            Thread.sleep(300);
             students.addAll(fallbackStore);
         }
         return students;

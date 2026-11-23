@@ -1,14 +1,14 @@
-# Java GUI Programming (RBCS 7312) — Coursework Portfolio
+# Java GUI Programming (RBCS 7312) - Coursework Portfolio
 
 **Student:** Eugene Lemayian Mukosa (`24ZAD110021`)  
-**Institution:** Riara University — School of Computing Sciences (BBIT)  
+**Institution:** Riara University - School of Computing Sciences (BBIT)  
 **Lecturer:** Florence Kimani  
 
-## Repository Structure (Weeks 1–10)
+## Repository Structure (Weeks 1-10)
 
 | Folder | Topic & Implementation Highlights |
 | :--- | :--- |
-| **Weeks 1 – 2** | Java GUI fundamentals, AWT/Swing component hierarchy, and Observer pattern basics. |
+| **Weeks 1 - 2** | Java GUI fundamentals, AWT/Swing component hierarchy, and Observer pattern basics. |
 | **`Week-3-Swing/`** | Swing containers and layout managers (`FlowLayout`, `GridLayout`, `CardLayout`). |
 | **`Week-4-Event-Handling/`** | Event-driven programming with `ActionListener` and interactive Swing controls. |
 | **`Week-5-Advanced-Swing/`** | Advanced Swing components (`JTable`, `JTree`, `JTabbedPane`, `JProgressBar`, `JToolBar`, `JDialog`, `JFileChooser`). |

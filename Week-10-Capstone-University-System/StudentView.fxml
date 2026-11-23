@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <VBox spacing="12" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="StudentController" style="-fx-padding: 18; -fx-background-color: #F8FAFC;">
 
-    <Label text="Riara University — Student Management System (Capstone)"
+    <Label text="Riara University - Student Management System (Capstone)"
            style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1B365D;"/>
 
     <GridPane hgap="10" vgap="8">

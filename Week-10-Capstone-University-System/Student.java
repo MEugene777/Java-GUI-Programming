@@ -14,10 +14,8 @@ public class Student {
 
     public String getRegNumber() { return regNumber.get(); }
     public StringProperty regNumberProperty() { return regNumber; }
-
     public String getFullName() { return fullName.get(); }
     public StringProperty fullNameProperty() { return fullName; }
-
     public String getCourse() { return course.get(); }
     public StringProperty courseProperty() { return course; }
 }

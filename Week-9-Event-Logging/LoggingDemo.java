@@ -23,25 +23,18 @@ public class LoggingDemo {
             button.addActionListener(e ->
                 logger.info("Button clicked: " + e.getActionCommand() + " | Thread: " + Thread.currentThread().getName())
             );
-
             textField.addKeyListener(new KeyAdapter() {
                 @Override
-                public void keyReleased(KeyEvent e) {
-                    logger.fine("Key released: " + e.getKeyChar());
-                }
+                public void keyReleased(KeyEvent e) { logger.fine("Key released: " + e.getKeyChar()); }
             });
-
             textField.addFocusListener(new FocusAdapter() {
                 @Override
-                public void focusGained(FocusEvent e) {
-                    logger.info("Text field gained focus");
-                }
+                public void focusGained(FocusEvent e) { logger.info("Text field gained focus"); }
             });
 
             frame.add(new JLabel("Input:"));
             frame.add(textField);
             frame.add(button);
-
             frame.setSize(340, 140);
             frame.setLocationRelativeTo(null);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
